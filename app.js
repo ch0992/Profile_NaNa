@@ -437,7 +437,13 @@ window.profileApp = function() {
                 
                 if (videoId && !profile.deco.bgmUrl.startsWith('data:audio')) {
                     const iframe = document.createElement('iframe');
-                    iframe.id = 'bgm-player'; iframe.style.display = 'none'; iframe.allow = "autoplay";
+                    iframe.id = 'bgm-player';
+                    iframe.style.width = '1px';
+                    iframe.style.height = '1px';
+                    iframe.style.position = 'absolute';
+                    iframe.style.left = '-9999px';
+                    iframe.style.opacity = '0.01';
+                    iframe.allow = "autoplay";
                     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`;
                     document.body.appendChild(iframe);
                 } else {
