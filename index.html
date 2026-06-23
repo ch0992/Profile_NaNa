@@ -151,8 +151,7 @@
                                     <div class="flex flex-wrap gap-1" x-show="profile.tags && profile.tags.length > 0">
                                         <template x-for="tag in profile.tags.slice(0, 2)">
                                             <span class="text-[10px] px-2 py-0.5 rounded-full font-medium"
-                                                  :class="profile.role === '방장' ? 'leader-tag' : 
-                                                          profile.role === '부방장' ? 'sub-leader-tag' : 
+                                                  :class="(profile.role === '방장' || profile.role === '부방장') ? 'sub-leader-tag' : 
                                                           'premium-tag text-white'"
                                                   x-text="'#'+tag"></span>
                                         </template>
@@ -301,8 +300,7 @@
                                 <div class="flex flex-wrap gap-2 justify-center mt-3 font-sans items-center" x-show="(selectedProfile?.tags && selectedProfile.tags.length > 0) || hasDetailedProfile(selectedProfile)">
                                     <template x-for="tag in selectedProfile?.tags">
                                         <span class="text-xs px-2.5 py-1 rounded-md backdrop-blur-sm font-bold border border-white/10" 
-                                              :class="selectedProfile?.role === '방장' ? 'leader-tag' : 
-                                                      selectedProfile?.role === '부방장' ? 'sub-leader-tag' : 
+                                              :class="(selectedProfile?.role === '방장' || selectedProfile?.role === '부방장') ? 'sub-leader-tag' : 
                                                       'premium-tag text-white'"
                                               x-text="'#'+tag"></span>
                                     </template>
