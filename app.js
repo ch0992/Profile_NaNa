@@ -597,11 +597,9 @@ window.profileApp = function() {
 
         deleteProfile() {
             if (!this.selectedProfile) return;
-            fetch(`/.netlify/functions/profiles?id=${this.selectedProfile.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-Profile-Password': this.inputPassword
-                }
+            const url = `/.netlify/functions/profiles?id=${this.selectedProfile.id}&password=${encodeURIComponent(this.inputPassword)}`;
+            fetch(url, {
+                method: 'DELETE'
             })
             .then(async res => {
                 if (!res.ok) {
