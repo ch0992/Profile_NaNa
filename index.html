@@ -96,6 +96,7 @@
                             <th class="py-4 px-4 hidden md:table-cell">태그</th>
                             <th class="py-4 px-4 text-center">자기소개</th>
                             <th class="py-4 px-4 text-center">사는 곳</th>
+                            <th class="py-4 px-4 text-center hidden md:table-cell">가입일</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 dark:divide-slate-800/40">
@@ -103,6 +104,7 @@
                             <tr class="hover:bg-slate-500/5 dark:hover:bg-slate-400/5 cursor-pointer transition-all duration-300 group"
                                 :class="profile.role === '방장' ? 'border-gold-glow border-l-4 border-l-amber-500 bg-amber-500/5' : 
                                         profile.role === '부방장' ? 'border-pink-glow border-l-4 border-l-pink-500 bg-pink-500/5' : 
+                                        isNewMember(profile.createdAt) ? 'border-green-glow border-l-4 border-l-lime-500 bg-lime-500/5' :
                                         (profile.decoAllowed ? 'border-l-4 border-l-primary/60 dark:border-l-yellow-400/70 bg-indigo-500/5 dark:bg-yellow-500/5' : '')"
                                 @click="openDetailModal(profile)">
                                 
@@ -118,10 +120,12 @@
                                             <!-- 닉네임 그라데이션 분기 -->
                                             <span x-text="profile.nickname" 
                                                   :class="(profile.role === '방장' || profile.role === '부방장') ? 'text-gold-gradient' : 
+                                                          isNewMember(profile.createdAt) ? 'text-green-gradient' :
                                                           (profile.decoAllowed ? 'text-gradient-animate' : '')"></span>
                                             <!-- 방장/부방장 텍스트 뱃지 -->
                                             <span x-show="profile.role === '방장'" class="badge py-1.5 px-2 text-[9px] font-black role-badge-bangjang">방장</span>
                                             <span x-show="profile.role === '부방장'" class="badge py-1.5 px-2 text-[9px] font-black role-badge-bubangjang">부방장</span>
+                                            <span x-show="isNewMember(profile.createdAt)" class="badge py-1.5 px-2 text-[9px] font-black new-member-badge">신입 🔰</span>
                                             <i x-show="profile.decoAllowed && profile.role !== '방장' && profile.role !== '부방장'" class="fa-solid fa-star text-yellow-400 text-xs shadow-black drop-shadow-md"></i>
                                         </div>
                                     </div>
@@ -169,6 +173,10 @@
                                     <span class="px-2.5 py-1 rounded-full text-xs font-bold inline-block"
                                           :class="getLocationBadgeClass(profile.location)"
                                           x-text="profile.location || '-'"></span>
+                                </td>
+                                <td class="py-4 px-4 text-center hidden md:table-cell">
+                                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+                                          x-text="formatDate(profile.createdAt)"></span>
                                 </td>
                             </tr>
                         </template>

@@ -682,6 +682,27 @@ window.profileApp = function() {
             if (this.toastTimeout) clearTimeout(this.toastTimeout);
             this.toastTimeout = setTimeout(() => { this.toast.show = false; }, 3000); 
         },
-        getYoutubeId(url) { if (!url) return ''; let videoId = url.trim(); try { if (videoId.includes('youtube.com/watch')) { const u = new URL(videoId); const v = u.searchParams.get('v'); if (v) return v; } else if (videoId.includes('youtu.be/')) { const u = new URL(videoId); const path = u.pathname.replace('/', ''); if (path) return path; } } catch (e) {} return videoId; }
+        getYoutubeId(url) { if (!url) return ''; let videoId = url.trim(); try { if (videoId.includes('youtube.com/watch')) { const u = new URL(videoId); const v = u.searchParams.get('v'); if (v) return v; } else if (videoId.includes('youtu.be/')) { const u = new URL(videoId); const path = u.pathname.replace('/', ''); if (path) return path; } } catch (e) {} return videoId; },
+
+        isNewMember(dateStr) {
+            if (!dateStr) return false;
+            const created = new Date(dateStr);
+            if (isNaN(created.getTime())) return false;
+            const cutOffDate = new Date('2026-06-23T11:00:00Z');
+            if (created < cutOffDate) return false;
+            const now = new Date();
+            const diffMs = now.getTime() - created.getTime();
+            return diffMs >= 0 && diffMs < (3 * 24 * 60 * 60 * 1000);
+        },
+
+        formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return '-';
+            const yy = String(date.getFullYear()).slice(-2);
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            return `${yy}.${mm}.${dd}`;
+        }
     }
 }
