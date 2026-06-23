@@ -1,0 +1,63 @@
+{
+  "p_1782062245803_ie19s": {
+    "nickname": "벤지",
+    "mbti": "ENFP",
+    "birth": "",
+    "height": "189.5",
+    "gender": "male",
+    "marriageStatus": "돌싱",
+    "role": "방장",
+    "intro": "",
+    "drinkSmoke": "",
+    "longDistance": "",
+    "idealType": "",
+    "prosCons": "",
+    "image": "",
+    "password": "1111",
+    "tags": [
+      "방장",
+      "친절함",
+      "스타크래프트"
+    ],
+    "images": [],
+    "decoAllowed": true,
+    "userId": "",
+    "deco": {
+      "font": "Pretendard",
+      "boxOpacity": 50,
+      "boxBlur": 16,
+      "bgImage": "",
+      "bgType": "image",
+      "bgmUrl": "",
+      "effect": "none",
+      "customEffectUrl": "",
+      "customEffectType": "falling",
+      "customEffectSpeed": 5,
+      "bgOpacity": 50,
+      "nameColor": "",
+      "bubbleColor": "",
+      "drinkColor": "",
+      "distanceColor": "",
+      "idealColor": "",
+      "prosConsColor": ""
+    },
+    "roomCode": "18411807017845862",
+    "id": "p_1782062245803_ie19s",
+    "decoPurchased": false,
+    "createdAt": "2026-06-21T17:17:25.803Z",
+    "updatedAt": "2026-06-21T20:31:00.817Z"
+  },
+  "p_1782062358909_0fgib": {
+    "name": "홍길동2",
+    "gender": "male",
+    "age": 28,
+    "married": "미혼",
+    "password": "123",
+    "id": "p_1782062358909_0fgib",
+    "decoAllowed": false,
+    "decoPurchased": false,
+    "role": "일반",
+    "createdAt": "2026-06-21T17:19:18.909Z",
+    "updatedAt": "2026-06-21T17:19:20.433Z"
+  }
+}
