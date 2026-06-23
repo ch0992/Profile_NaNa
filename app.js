@@ -595,6 +595,26 @@ window.profileApp = function() {
             } else { this.showToast('비밀번호 불일치', 'error'); }
         },
 
+        deleteProfile() {
+            if (!this.selectedProfile) return;
+            fetch(`/.netlify/functions/profiles?id=${this.selectedProfile.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-Profile-Password': this.inputPassword
+                }
+            })
+            .then(async res => {
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.error || '삭제 실패');
+                }
+                this.showToast('프로필이 삭제되었습니다.');
+                this.selectedProfile = null;
+                this.loadProfiles();
+            })
+            .catch(err => this.showToast(err.message, 'error'));
+        },
+
         getAge(birthStr) { if (!birthStr) return 0; const birth = new Date(birthStr); const today = new Date(); let age = today.getFullYear() - birth.getFullYear(); if (today.getMonth() < birth.getMonth() || (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) age--; return age; },
         getBirthDate(birthStr) { if (!birthStr) return ''; const date = new Date(birthStr); return `${date.getMonth() + 1}.${date.getDate()}`; },
         getRandomAvatar(seed, gender) { let url = `https://api.dicebear.com/7.x/notionists/svg?seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9`; if (gender === 'female') { url += "&beardProbability=0&hair=variant12,variant16,variant22,variant26,variant29,variant36,variant39,variant43&glassesProbability=30"; } else { url += "&beardProbability=100&beard=variant02,variant03,variant05,variant06&glassesProbability=30"; } return url; },
