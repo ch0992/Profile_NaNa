@@ -429,29 +429,23 @@ window.profileApp = function() {
             this.galleryIndex = 0;
             this.selectedProfile = profile;
             
-            const oldPlayer = document.getElementById('bgm-player');
-            if (oldPlayer) oldPlayer.remove();
+            const youtubePlayer = document.getElementById('bgm-player-youtube');
+            const audioPlayer = document.getElementById('bgm-player-audio');
+            if (youtubePlayer) youtubePlayer.src = '';
+            if (audioPlayer) { audioPlayer.pause(); audioPlayer.src = ''; }
 
             if (profile.deco && profile.deco.bgmUrl) {
                 let videoId = this.getYoutubeId(profile.deco.bgmUrl);
                 
                 if (videoId && !profile.deco.bgmUrl.startsWith('data:audio')) {
-                    const iframe = document.createElement('iframe');
-                    iframe.id = 'bgm-player';
-                    iframe.style.width = '1px';
-                    iframe.style.height = '1px';
-                    iframe.style.position = 'absolute';
-                    iframe.style.left = '-9999px';
-                    iframe.style.opacity = '0.01';
-                    iframe.allow = "autoplay";
-                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`;
-                    document.body.appendChild(iframe);
+                    if (youtubePlayer) {
+                        youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`;
+                    }
                 } else {
-                    const audio = document.createElement('audio');
-                    audio.id = 'bgm-player'; audio.style.display = 'none';
-                    audio.src = profile.deco.bgmUrl; audio.autoplay = true; audio.loop = true;
-                    document.body.appendChild(audio);
-                    audio.play().catch(e => console.log("Audio autoplay was blocked by the browser:", e));
+                    if (audioPlayer) {
+                        audioPlayer.src = profile.deco.bgmUrl;
+                        audioPlayer.play().catch(e => console.log("Audio autoplay was blocked by the browser:", e));
+                    }
                 }
             }
 
@@ -461,7 +455,10 @@ window.profileApp = function() {
         closeDetailModal() {
             document.getElementById('detail_modal').close();
             setTimeout(() => {
-                const player = document.getElementById('bgm-player'); if(player) player.remove();
+                const youtubePlayer = document.getElementById('bgm-player-youtube');
+                const audioPlayer = document.getElementById('bgm-player-audio');
+                if (youtubePlayer) youtubePlayer.src = '';
+                if (audioPlayer) { audioPlayer.pause(); audioPlayer.src = ''; }
                 const container = document.getElementById('particle-container'); if(container) container.innerHTML = '';
                 this.selectedProfile = null;
             }, 300);
