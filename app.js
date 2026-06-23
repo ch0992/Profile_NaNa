@@ -608,8 +608,8 @@ window.profileApp = function() {
                     const err = await res.json();
                     throw new Error(err.error || '삭제 실패');
                 }
+                this.closeDetailModal();
                 this.showToast('프로필이 삭제되었습니다.');
-                this.selectedProfile = null;
                 this.loadProfiles();
             })
             .catch(err => this.showToast(err.message, 'error'));
