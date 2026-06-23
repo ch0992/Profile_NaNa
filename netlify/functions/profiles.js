@@ -215,7 +215,7 @@ export const handler = async (event, context) => {
         // 등록 시
         const id = "p_" + Date.now().toString() + "_" + Math.random().toString(36).substr(2, 5);
         data.id = id;
-        data.decoAllowed = false;
+        data.decoAllowed = true;
         data.decoPurchased = false;
         data.role = '일반';
         data.createdAt = new Date().toISOString();
