@@ -692,7 +692,7 @@ window.profileApp = function() {
             if (created < cutOffDate) return false;
             const now = new Date();
             const diffMs = now.getTime() - created.getTime();
-            return diffMs >= 0 && diffMs < (3 * 24 * 60 * 60 * 1000);
+            return diffMs >= -3600000 && diffMs < (3 * 24 * 60 * 60 * 1000);
         },
 
         formatDate(dateStr) {
