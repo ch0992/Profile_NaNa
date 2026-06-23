@@ -2,6 +2,11 @@
   "name": "nana-profile",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "backup": "netlify dev:exec node backup.js",
+    "restore": "netlify dev:exec node restore.js"
+  },
   "dependencies": {
     "@netlify/blobs": "^8.0.0"
   }
